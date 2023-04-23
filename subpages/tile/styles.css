@@ -1,0 +1,39 @@
+/* Importer Font Awesome ikoner og Source Sans Pro skrifttype */
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
+
+/* Style hele siden */
+body {
+  font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+  margin: 0; /* Fjern standard marg */
+}
+
+/* Style venstre del med et bilde */
+.left {
+  float: left; /* Flytt til venstre side */
+  width: 50%; /* Sett bredde til 50% av skjermen */
+  height: 100vh; /* Sett høyde til 100% av skjermhøyden */
+  background-image: url("dragon.jpg"); /* Sett bakgrunnsbilde */
+  background-size: cover; /* Skaler bildet til å dekke hele delen */
+}
+
+/* Style høyre del med tekst */
+.right {
+  float: right; /* Flytt til høyre side */
+  width: 50%; /* Sett bredde til 50% av skjermen */
+  height: 100vh; /* Sett høyde til 100% av skjermhøyden */
+  background-color: #f0f0f0; /* Sett bakgrunnsfarge */
+  padding: 20px; /* Legg til litt innrykk */
+}
+
+/* Style overskriften */
+h1 {
+  color: #333; /* Sett tekstfarge */
+  font-size: 36px; /* Sett skriftstørrelse */
+}
+
+/* Style avsnittet */
+p {
+  color: #666; /* Sett tekstfarge */
+  font-size: 18px; /* Sett skriftstørrelse */
+}
