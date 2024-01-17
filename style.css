@@ -1,0 +1,116 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Source Code Pro', monospace;
+    justify-content: center;
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: #c9c9c7;
+    user-select: none;
+}
+
+header, main {
+    text-align: center;
+}
+
+.game-image {
+    max-width: 90%; 
+    height: 300px; 
+    max-height: 90%; 
+    width: auto;
+}
+
+.rounded-img {
+    border: 1px solid white;
+    border-radius: 30px;
+}
+
+#year-slider {
+    height: 2px;
+    outline: none;
+    width: 80%;
+    user-select: none;
+}
+
+#year-slider::-webkit-slider-runnable-track {
+    background: white;
+    height: 1px;
+    user-select: none;
+}
+
+#year-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -5.5px; 
+    height: 1px;
+    width: 12px;
+    border-radius: 50%;
+    background: black;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+#year-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.5);
+}
+
+#selected-year {
+    border: 2px solid white;
+    border-radius: 12px; 
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    width: 100px; 
+    appearance: textfield; 
+    -moz-appearance: textfield;
+    margin-top: 20px;
+    width: 35%;  /* Set width to half of input field (35% of container width) */
+    height: 50px; /* Make it same height as the input field */
+    font-size: 24px; /* Increase font size */
+}
+
+#selected-year::placeholder {
+    color: white;
+}
+
+#selected-year::-webkit-inner-spin-button, 
+#selected-year::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#confirm-button {
+    color: white;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 12px; 
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    margin-left: 15%;
+    width: 4%;  /* Set width to half of input field (5% of container width) */
+    height:60px; /* Make it same height as the input field */
+    font-size: 24px; /* Increase font size */
+}
+
+
+#confirm-button::after {
+    content: "";
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 12px solid white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+}
+
+#confirm-button:hover {
+    background-color: grey;
+}
