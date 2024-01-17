@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Source Code Pro', monospace;
+    justify-content: center;
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: #c9c9c7;
+    user-select: none;
+}
+
+header, main {
+    text-align: center;
+}
+
+.game-image {
+    max-width: 90%; 
+    height: 300px; 
+    max-height: 90%; 
+    width: auto;
+}
+
+.rounded-img {
+    border: 1px solid white;
+    border-radius: 30px;
+}
