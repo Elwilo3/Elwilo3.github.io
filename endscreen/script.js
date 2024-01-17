@@ -1,33 +1,26 @@
-window.addEventListener('load', () => {
-    const statsContainer = document.getElementById("statsContainer");
+window.addEventListener('load', (event) => {
+    // Load stats from local storage
+    let stats = JSON.parse(localStorage.getItem('stats')) || {};
 
-    let stats = JSON.parse(localStorage.getItem('stats'));
+    // Calculate win percentage
+    let winPercentage = (stats.winCount / stats.gamesPlayed * 70).toFixed(2);
 
-    if (!stats || stats.gamesPlayed === 0) {
-        statsContainer.innerHTML = "<h2>Please play some games to view your statistics!</h2>";
-    } else {
-        const gamesPlayed = document.createElement('p');
-        gamesPlayed.innerText = `Number of games played: ${stats.gamesPlayed}`;
-        statsContainer.appendChild(gamesPlayed);
+    // Get HTML elements to display stats
+    let gamesPlayedElement = document.getElementById("gamesPlayed");
+    let winPercentageElement = document.getElementById("winPercentage");
+    let currentStreakElement = document.getElementById("currentStreak");
+    let guessDistributionElement = document.getElementById("guessDistribution");
 
-        const winPercentage = document.createElement('p');
-        winPercentage.innerText = `Win percentage: ${((stats.winCount / stats.gamesPlayed) * 100).toFixed(2)}%`;
-        statsContainer.appendChild(winPercentage);
+    // Assign stats to HTML elements
+    gamesPlayedElement.innerText = `Games Played: ${stats.gamesPlayed}`;
+    winPercentageElement.innerText = `Win Percentage: ${winPercentage}%`;
+    currentStreakElement.innerText = `Current Streak: ${stats.currentStreak}`;
 
-        const currentStreak = document.createElement('p');
-        currentStreak.innerText = `Current win streak: ${stats.currentStreak}`;
-        statsContainer.appendChild(currentStreak);
-
-        const guessDistributionHeader = document.createElement('h2');
-        guessDistributionHeader.innerText = "Guess Distribution";
-        statsContainer.appendChild(guessDistributionHeader);
-
-        const guessDistribution = document.createElement('div');
-        Object.keys(stats.guessDistribution).forEach(score => {
-            let para = document.createElement('p');
-            para.innerText = `Score: ${score}, Times: ${stats.guessDistribution[score]}`;
-            guessDistribution.appendChild(para);
-        });
-        statsContainer.appendChild(guessDistribution);
+    guessDistributionElement.innerHTML = '';
+    
+    for(let points of Object.keys(stats.guessDistribution)){
+        let distributionElement = document.createElement('p');
+        distributionElement.innerText = `${points}: ${stats.guessDistribution[points]} times`;
+        guessDistributionElement.appendChild(distributionElement);
     }
 });

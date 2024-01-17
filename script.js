@@ -11,12 +11,32 @@ window.addEventListener('load', (event) => {
     const gameStatusKey = 'pudaguessrGameStatus';
     const gameStatus = JSON.parse(localStorage.getItem(gameStatusKey));
     
-
-
     let correctYear;
     let currentIndex = 0;
     let totalScore = 0;
+
+    if (gameStatus && gameStatus.lastPlayed === today) {
+        totalScore = JSON.parse(localStorage.getItem('score')) || totalScore;
+    }
+    
     let scoreElement = document.getElementById("score");
+    scoreElement.innerText = "Current Score: " + totalScore;
+
+    // Initialize global stats object
+    let stats = JSON.parse(localStorage.getItem('stats')) || {
+        gamesPlayed: 0,
+        winCount: 0,
+        currentStreak: 0,
+        guessDistribution: {
+            '100': 0,
+            '200': 0,
+            '300': 0,
+            '400': 0,
+            '500': 0,
+        }
+    };
+
+    // Game logic methods like loadNextImage(), updateRemainingImages(), etc.
 
     function loadNextImage() {
         let imageContainer = document.getElementById("image");
@@ -30,20 +50,6 @@ window.addEventListener('load', (event) => {
     function updateRemainingImages() {
         let remainingImagesElement = document.getElementById("remaining-images");
         remainingImagesElement.innerText = "Images left: " + (images.length - currentIndex);
-    }
-
-    function endGame() {
-        alert(`Spillet er over! Du fikk ${totalScore} av 500 mulige poeng!`);
-
-        // Retrieve existing scores from local storage, or initialize if not present
-        let scores = JSON.parse(localStorage.getItem('scores')) || {};
-        let scoreRange = Math.floor(totalScore / 1000) * 1000;
-        if (scoreRange === 0) scoreRange = 1000; // Minimum range if score is below 1000
-        scores[scoreRange.toString()] = (scores[scoreRange.toString()] || 0) + 1; // Increment score count
-        localStorage.setItem('scores', JSON.stringify(scores));
-
-        localStorage.setItem(gameStatusKey, JSON.stringify({ lastPlayed: today }));
-        window.location.href = 'endscreen/index.html';
     }
 
     loadNextImage();
@@ -60,6 +66,15 @@ window.addEventListener('load', (event) => {
         slider.value = this.value;
     });
 
+    function endGame(totalScore) {
+        localStorage.setItem('score', JSON.stringify(totalScore));
+
+        // place the rest of your endGame code here
+
+        localStorage.setItem('gameStatus', JSON.stringify({ lastPlayed: today }));
+        window.location.href = 'endscreen/index.html';
+    }
+
     let button = document.getElementById("confirm-button");
     button.addEventListener('click', function() {
         let selectedYear = parseInt(selectedYearInput.value);
@@ -75,7 +90,7 @@ window.addEventListener('load', (event) => {
         if (currentIndex < images.length) {
             loadNextImage();
         } else {
-            endGame();
+            endGame(totalScore);
         }
     });
 });
